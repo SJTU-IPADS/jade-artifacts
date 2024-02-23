@@ -35,7 +35,7 @@ Currently Jade is not ready for open-source. However, we have set up a machine a
 
 **Software dependencies.** The operating system used in our machines is Alibaba Cloud Linux release 3, which is a distribution based on the 5.10.112-11.1.al8.x86_64 version of Linux kernel. But other distributions of Linux with higher kernel version are also acceptable.
 
-# Getting started
+# Getting Started
 Jade is a garbage collector developed based on JDK 11. You can use Jade just like using any other JDK.
 ```
 $ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java --version
