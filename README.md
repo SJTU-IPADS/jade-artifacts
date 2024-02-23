@@ -43,7 +43,7 @@ openjdk 11.0.17.13 2023-02-08
 OpenJDK Runtime Environment (Alibaba Dragonwell) (build 11.0.17.13+0)
 OpenJDK 64-Bit Server VM (Alibaba Dragonwell) (build 11.0.17.13+0, mixed mode)
 ```
-You just need to add the parameters "-XX:+UseJadeGC -XX:+JadeEnableChasingMode" in the command to run Java applications with Jade. Below is an example of running the dacapo's lusearch with Jade.
+You just need to add the parameters `-XX:+UseJadeGC -XX:+JadeEnableChasingMode` in the command to run Java applications with Jade. Below is an example of running the dacapo's lusearch with Jade.
 
 ```
 $ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java -XX:+UseJadeGC -XX:+JadeEnableChasingMode -jar /home/jadetest/jade-ae/dacapo/dacapo-evaluation-git-b00bfa9.jar lusearch
