@@ -47,7 +47,7 @@ do
         numactl -C 0-7 -m0 ../jdk/jdk-21-genz/bin/java   -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65   -XX:+UseZGC -XX:+ZGenerational   -jar $DACAPO_PATH $BENCH_NAME -n 6 &> $LOG_PATH/$BENCH_NAME/gclog_gen_zgc_heap${HEAPCONFIGNAME}.txt 
 
         echo "Start Jade test"
-        numactl -C 0-7 -m0 ../jdk/jdk-jade/bin/java -XX:+JadeEnableChasingMode  -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:+UseJadeGC -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65   -XX:JadeConcEvacGCThreads=1 -XX:+UseJadeGC   -jar $DACAPO_PATH $BENCH_NAME -n 6 &> $LOG_PATH/$BENCH_NAME/gclog_jade_chasing_heap${HEAPCONFIGNAME}.txt 
+        numactl -C 0-7 -m0 ../jdk/jdk-jade/bin/java -XX:+JadeEnableChasingMode  -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:+UseJadeGC -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65   -XX:JadeConcEvacGCThreads=1 -jar $DACAPO_PATH $BENCH_NAME -n 6 &> $LOG_PATH/$BENCH_NAME/gclog_jade_chasing_heap${HEAPCONFIGNAME}.txt 
     done
 done 
 

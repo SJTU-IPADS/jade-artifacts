@@ -1,4 +1,4 @@
-rm ../results/dacapo/report.csv
+rm -f ../results/dacapo/report.csv
 for path in $(find ../results/dacapo | grep txt)
 do
     # echo $path
