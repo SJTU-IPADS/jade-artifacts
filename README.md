@@ -49,14 +49,29 @@ You just need to add the parameters `-XX:+UseJadeGC -XX:+JadeEnableChasingMode` 
 $ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java -XX:+UseJadeGC -XX:+JadeEnableChasingMode -jar /home/jadetest/jade-ae/dacapo/dacapo-evaluation-git-b00bfa9.jar lusearch
 ```
 
-# E1. DaCapo Benchmarks
+# Evaluation Workflow
+This artifact contains two major claims (C1, C2), which are proven by three experiments (E1-E3).
+## Major Claims
+- **C1.** In applications with low memory consumption, Jade exhibits slightly lower throughput compared to g1 and lxr, but outperforms other concurrent collectors significantly.
+
+- **C2.** In applications with higher memory usage, Jade demonstrates lower latency than other garbage collectors under high throughput conditions. While G1 is the only garbage collector capable of achieving slightly higher maximum throughput than Jade, this comes at the expense of noticeably higher latency.
+
+## Experiments Description
+| Experiment | Script | Table & Figure| Claim |
+|:--------:|:--------:|:---------:| :----:|
+| E1 | ./run-dacapo.sh | Table 4 | C1 | 
+| E2 | ./run-specjbb.sh | Table 3 & Figure 4 | C2 | 
+| E3 | ./run-hbase.sh | Figure 5 | C2 |
+
+## E1. DaCapo Benchmarks
 Run the following script to evaluate baseline and jade.
 ```
 $ cd /home/jadetest/jade-ae/scripts
 $ bash ./run-dacapo.sh
 ```
 Results will be automatically generated at `/home/jadetest/jade-ae/results/dacapo/report.csv` and should be consistent with **Table 4**.
-# E2. SPECjbb 2015
+
+## E2. SPECjbb 2015
 Run the following script to evaluate baseline and jade.
 ```
 $ cd /home/jadetest/jade-ae/scripts
@@ -69,7 +84,7 @@ For example, the SPECjbb 2015 report with g1 and 4x heap size can be found at `/
 **NOTE:** Please note that each run of Specjbb2015 will take approximately 2-3 hours. This set of experiments includes testing 21 test points, so it may take up to 63 hours in total. Please make sure to allocate enough time for the experiments.
 
 
-# E3. HBase
+## E3. HBase
 Run the following script to evaluate baseline and jade.
 ```
 $ cd /home/jadetest/jade-ae/scripts
