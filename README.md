@@ -30,15 +30,33 @@ Currently Jade is not ready for open-source. However, we have set up a machine a
 
 **Results** will be generated at `./jade-ae/results`, and the following documentation will explain how to utilize these results.
 
+# Platform Description
+**Hardware dependencies.** We provide an ECS instance on Alibaba Cloud to conduct all the experiments. The processor model of the ECS instance is Intel Xeon (Ice Lake) Platinum 8369B. Other x86_64 hardware can also use Jade and run our experiment.  
 
-# DaCapo Benchmarks
+**Software dependencies.** The operating system used in our machines is Alibaba Cloud Linux release 3, which is a distribution based on the 5.10.112-11.1.al8.x86_64 version of Linux kernel. But other distributions of Linux with higher kernel version are also acceptable.
+
+# Getting started
+Jade is a garbage collector developed based on JDK 11. You can use Jade just like using any other JDK.
+```
+$ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java --version
+openjdk 11.0.17.13 2023-02-08
+OpenJDK Runtime Environment (Alibaba Dragonwell) (build 11.0.17.13+0)
+OpenJDK 64-Bit Server VM (Alibaba Dragonwell) (build 11.0.17.13+0, mixed mode)
+```
+You just need to add the parameters "-XX:+UseJadeGC -XX:+JadeEnableChasingMode" in the command to run Java applications with Jade. Below is an example of running the dacapo's lusearch with Jade.
+
+```
+$ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java -XX:+UseJadeGC -XX:+JadeEnableChasingMode -jar /home/jadetest/jade-ae/dacapo/dacapo-evaluation-git-b00bfa9.jar lusearch
+```
+
+# E1. DaCapo Benchmarks
 Run the following script to evaluate baseline and jade.
 ```
 $ cd /home/jadetest/jade-ae/scripts
 $ bash ./run-dacapo.sh
 ```
 Results will be automatically generated at `/home/jadetest/jade-ae/results/dacapo/report.csv` and should be consistent with **Table 4**.
-# SPECjbb 2015
+# E2. SPECjbb 2015
 Run the following script to evaluate baseline and jade.
 ```
 $ cd /home/jadetest/jade-ae/scripts
@@ -51,7 +69,7 @@ For example, the SPECjbb 2015 report with g1 and 4x heap size can be found at `/
 **NOTE:** Please note that each run of Specjbb2015 will take approximately 2-3 hours. This set of experiments includes testing 21 test points, so it may take up to 63 hours in total. Please make sure to allocate enough time for the experiments.
 
 
-# HBase
+# E3. HBase
 Run the following script to evaluate baseline and jade.
 ```
 $ cd /home/jadetest/jade-ae/scripts
