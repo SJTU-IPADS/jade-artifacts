@@ -15,8 +15,30 @@ do
     HEAPCONFIG=${HEAP_CONFIGS[idx]}
     HEAPCONFIGNAME=${HEAP_NAMES[idx]}
 
+    echo "Start G1 test"
+    numactl -C 0-7 -m0 ../jdk/jdk-11/bin/java -XX:+UseG1GC -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65 -Dspecjbb.controller.port=38668 -Djava.io.tmpdir="../tmp/specjbb-tmpfile" -jar specjbb2015.jar -m COMPOSITE > logs/gclog_g1_chasing_heap${HEAPCONFIGNAME}.txt
+    rm -rf ../results/specjbb/g1-heap${HEAPCONFIGNAME} 
+    mv ./result/specjbb2015* ../results/specjbb/g1-heap${HEAPCONFIGNAME}
+
+    echo "Start Shenandoah test"
+    numactl -C 0-7 -m0 ../jdk/jdk-11/bin/java -XX:+UseShenandoahGC -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65 -Dspecjbb.controller.port=38668 -Djava.io.tmpdir="../tmp/specjbb-tmpfile" -jar specjbb2015.jar -m COMPOSITE > logs/gclog_shenandoah_chasing_heap${HEAPCONFIGNAME}.txt
+    rm -rf ../results/specjbb/shenandoah-heap${HEAPCONFIGNAME} 
+    mv ./result/specjbb2015* ../results/specjbb/shenandoah-heap${HEAPCONFIGNAME}
+
+    echo "Start ZGC test"
+    numactl -C 0-7 -m0 .../jdk/jdk-11/bin/java -XX:+UseZGC -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65 -Dspecjbb.controller.port=38668 -Djava.io.tmpdir="../tmp/specjbb-tmpfile" -jar specjbb2015.jar -m COMPOSITE > logs/gclog_zgc_chasing_heap${HEAPCONFIGNAME}.txt
+    rm -rf ../results/specjbb/zgc-heap${HEAPCONFIGNAME} 
+    mv ./result/specjbb2015* ../results/specjbb/zgc-heap${HEAPCONFIGNAME}
+
+
     echo "Start Jade test"
-    numactl -C 0-7 -m0 ../jdk/jdk-jade/bin/java -XX:+JadeEnableChasingMode  -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:+UseJadeGC -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65   -XX:JadeConcEvacGCThreads=1 -Dspecjbb.controller.port=38668 -Djava.io.tmpdir="../tmp/specjbb-tmpfile" -jar specjbb2015.jar -m COMPOSITE > logs/gclog_jade_chasing_heap${HEAPCONFIGNAME}.txt
+    numactl -C 0-7 -m0 ../jdk/jdk-jade/bin/java -XX:+JadeEnableChasingMode  -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:+UseJadeGC -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65   -XX:JadeConcEvacGCThreads=1 -XX:+UseJadeGC  -Dspecjbb.controller.port=38668 -Djava.io.tmpdir="../tmp/specjbb-tmpfile" -jar specjbb2015.jar -m COMPOSITE > logs/gclog_jade_chasing_heap${HEAPCONFIGNAME}.txt
+    rm -rf ../results/specjbb/jade-heap${HEAPCONFIGNAME} 
+    mv ./result/specjbb2015* ../results/specjbb/jade-heap${HEAPCONFIGNAME}
+
+
+    echo "Start Jade test"
+    numactl -C 0-7 -m0 ../jdk/jdk-jade/bin/java -XX:+JadeEnableChasingMode  -XX:MaxMetaspaceSize=1024m -XX:MetaspaceSize=1024m -Xmx${HEAPCONFIG}m -Xms${HEAPCONFIG}m -XX:+UseJadeGC -XX:ParallelGCThreads=8 -XX:ConcGCThreads=2 -XX:InitiatingHeapOccupancyPercent=65   -XX:JadeConcEvacGCThreads=1 -XX:+UseJadeGC  -Dspecjbb.controller.port=38668 -Djava.io.tmpdir="../tmp/specjbb-tmpfile" -jar specjbb2015.jar -m COMPOSITE > logs/gclog_jade_chasing_heap${HEAPCONFIGNAME}.txt
     rm -rf ../results/specjbb/jade-heap${HEAPCONFIGNAME} 
     mv ./result/specjbb2015* ../results/specjbb/jade-heap${HEAPCONFIGNAME}
 
