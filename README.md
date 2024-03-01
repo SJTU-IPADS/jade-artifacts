@@ -56,6 +56,17 @@ This artifact contains two major claims (C1, C2), which are proven by three expe
 
 - **C2.** In applications with higher memory usage, Jade demonstrates lower latency than other garbage collectors under high throughput conditions. While G1 is the only garbage collector capable of achieving slightly higher maximum throughput than Jade, this comes at the expense of noticeably higher latency.
 
+## The approximate resources used per claim
+
+**C1** 
+
+- 8 cores, about 4 hours to run all applications
+
+**C2**
+- Specjbb2015: 8 cores, about 60 hours to run all data points
+
+- HBase: 32 cores, about 24 hours to run all points
+
 ## Experiments Description
 | Experiment | Script | Table & Figure| Claim |
 |:--------:|:--------:|:---------:| :----:|
