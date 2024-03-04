@@ -1,7 +1,7 @@
 # rm -f ../results/specjbb/report.csv
 REPORT_FILE="../results/specjbb/report.csv"
 RT_FILE="../results/specjbb/rt_curve.csv "
-rm $REPORT_FILE $RT_FILE
+rm $REPORT_FILE $RT_FILE -f
 
 echo "heap-size,GC-name,critical-jOPS,max-jOPS" > $REPORT_FILE
 echo "heap-size,GC-name,jOPS, p99" > $RT_FILE

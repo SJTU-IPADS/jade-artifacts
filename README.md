@@ -38,7 +38,7 @@ Currently Jade is not ready for open-source. However, we have set up a machine a
 # Getting Started
 Jade is a garbage collector developed based on JDK 11. You can use Jade just like using any other JDK.
 ```
-$ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java --version
+$ ~/jade-ae/jdk/jdk-jade/bin/java --version
 openjdk 11.0.17.13 2023-02-08
 OpenJDK Runtime Environment (Alibaba Dragonwell) (build 11.0.17.13+0)
 OpenJDK 64-Bit Server VM (Alibaba Dragonwell) (build 11.0.17.13+0, mixed mode)
@@ -46,7 +46,7 @@ OpenJDK 64-Bit Server VM (Alibaba Dragonwell) (build 11.0.17.13+0, mixed mode)
 You just need to add the parameters `-XX:+UseJadeGC -XX:+JadeEnableChasingMode` in the command to run Java applications with Jade. Below is an example of running the dacapo's lusearch with Jade.
 
 ```
-$ /home/jadetest/jade-ae/jdk/jdk-jade/bin/java -XX:+UseJadeGC -XX:+JadeEnableChasingMode -jar /home/jadetest/jade-ae/dacapo/dacapo-evaluation-git-b00bfa9.jar lusearch
+$ ~/jade-ae/jdk/jdk-jade/bin/java -XX:+UseJadeGC -XX:+JadeEnableChasingMode -jar ~/jade-ae/dacapo/dacapo-evaluation-git-b00bfa9.jar lusearch
 ```
 
 # Evaluation Workflow
@@ -77,20 +77,27 @@ This artifact contains two major claims (C1, C2), which are proven by three expe
 ## E1. DaCapo Benchmarks
 Run the following script to evaluate baseline and jade.
 ```
-$ cd /home/jadetest/jade-ae/scripts
+$ cd ~/jade-ae/scripts
 $ bash ./run-dacapo.sh
 ```
-Results will be automatically generated at `/home/jadetest/jade-ae/results/dacapo/report.csv` and should be consistent with **Table 4**.
+Results will be automatically generated at `~/jade-ae/results/dacapo/report.csv` and should be consistent with **Table 4**.
 
 ## E2. SPECjbb 2015
 Run the following script to evaluate baseline and jade.
 ```
-$ cd /home/jadetest/jade-ae/scripts
+$ cd ~/jade-ae/scripts
 $ bash ./run-specjbb.sh
 ```
-Reports will be automatically generated in the following folder: `/home/jadetest/jade-ae/results/specjbb`
+Reports will be automatically generated in the following folder: `~/jade-ae/results/specjbb`
 
-For example, the SPECjbb 2015 report with g1 and 4x heap size can be found at `/home/jadetest/jade-ae/results/specjbb/g1-heap4.0/report-00001/specjbb2015-C-XXXXXX-XXXXXX.html`. The majority of the crucial data from the report is located at `/home/jadetest/jade-ae/results/specjbb/g1-heap4.0/report-00001/data/rt-curve/specjbb2015-C-XXXXXX-XXXXXX-overall-throughput-rt.txt`. The maximum-jops and critical-jops of SPECjbb-g1-4xHeap testcase in **Table 3** can be found at the beginning of this txt file, along with the throughput-p99 data of **Figure 4** following it.
+For example, the SPECjbb 2015 report with g1 and 4x heap size can be found at `~/jade-ae/results/specjbb/g1-heap4.0/report-00001/specjbb2015-C-XXXXXX-XXXXXX.html`. The majority of the crucial data from the report is located at `~/jade-ae/results/specjbb/g1-heap4.0/report-00001/data/rt-curve/specjbb2015-C-XXXXXX-XXXXXX-overall-throughput-rt.txt`. The maximum-jops and critical-jops of SPECjbb-g1-4xHeap testcase in **Table 3** can be found at the beginning of this txt file, along with the throughput-p99 data of **Figure 4** following it.
+
+Run the following script to generate report.
+```
+$ cd ~/jade-ae/scripts
+$ bash ./get-report-specjbb.sh
+```
+The script will generate two files: ./jade-ae/results/specjbb/report.csv and ./jade-ae/results/specjbb/rt_curve.csv. These files contain the peak jops numbers and raw data for the response time curve, respectively.
 
 **NOTE:** Please note that each run of Specjbb2015 will take approximately 2-3 hours. This set of experiments includes testing 21 test points, so it may take up to 63 hours in total. Please make sure to allocate enough time for the experiments.
 
@@ -98,10 +105,10 @@ For example, the SPECjbb 2015 report with g1 and 4x heap size can be found at `/
 ## E3. HBase
 Run the following script to evaluate baseline and jade.
 ```
-$ cd /home/jadetest/jade-ae/scripts
+$ cd ~/jade-ae/scripts
 $ bash ./run-hbase.sh
 ```
-Reports will be automatically generated in the following folder: `/home/jadetest/jade-ae/results/hbase`
+Reports will be automatically generated in the following folder: `~/jade-ae/results/hbase`
 
-For instance, you can locate the HBase report for the YCSB mix workload with a 4x heap size (4400m) in the following file `/home/jadetest/jade-ae/results/hbase/4400m-mix.csv`. You may have to sort this table by hand in order to reproduce **Figure 5**.
+For instance, you can locate the HBase report for the YCSB mix workload with a 4x heap size (4400m) in the following file `~/jade-ae/results/hbase/4400m-mix.csv`. You may have to sort this table by hand in order to reproduce **Figure 5**.
 
