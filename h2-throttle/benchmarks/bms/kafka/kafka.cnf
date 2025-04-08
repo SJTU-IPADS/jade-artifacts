@@ -1,0 +1,24 @@
+benchmark kafka
+  class org.dacapo.harness.Kafka
+  thread-model per_cpu;
+
+size small args "simple_produce_bench-small.json", "10000"
+  output stdout digest 0xd054f76402d83d91bc9824746d89c489c458a103,
+         stderr digest 0x49eb5f30bb81b66c3e38a78f9122256c85254479;
+         
+size default args "simple_produce_bench.json", "1000000"
+  output stdout digest 0xd054f76402d83d91bc9824746d89c489c458a103,
+         stderr digest 0x36fed859a569f5840cd873e556ce3028dcac3371;
+         
+size large args "simple_produce_bench-large.json", "10000000"
+  output stdout digest 0xd054f76402d83d91bc9824746d89c489c458a103,
+         stderr digest 0x452a8ac06032778f38bc1853b00dbdfb170bea3b;
+
+description
+  short	     "Apache Kafka® is a distributed streaming platform.",
+  long       "Apache Kafka® aims to provide a unified, high-throughput, low-latency platform for handling real-time data feeds.",
+  copyright	 "Copyright (c) Apache Software Foundation",
+  author	 "Apache Software Foundation",
+  license    "Apache License, Version 2.0",
+  url        "https://kafka.apache.org/",
+  threads    "Explicitly multi-threaded, scaled to available processors.",

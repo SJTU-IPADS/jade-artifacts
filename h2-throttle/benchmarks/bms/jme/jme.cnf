@@ -1,0 +1,30 @@
+benchmark jme
+  class org.dacapo.harness.JME
+  thread-model single;
+
+size small args "TestMultiPostWater", "10"
+  threads 1      // per available processor
+  output
+      stdout digest 0x1badcf6a70c90d1be177b3c7ee1003a82669ccfc,
+      stderr digest 0xd413ed1274b62edc9e59fc1976947e45cc4143e3;
+
+size default args "TestMultiPostWater", "400"
+  threads 1      // per available processor
+  output
+      stdout digest 0x3689acff0669d2036f16586f193a1275e97c0cbc,
+      stderr digest 0xcf2894f2ad60a686300152c79149a18848b46f28;
+
+size large args "TestMultiPostWater", "8000"
+  threads 1      // per available processor
+  output
+      stdout digest 0xc6367d78c6d287197db2e3e30d126c0d574c9131,
+      stderr digest 0x2e91d021d5a79c4f1c5b42fd3da7a948f78305a6;
+
+description
+  short	     "A complete 3D game development suite written purely in Java.",
+  long       "jMonkeyEngine is a 3D game engine for adventurous Java developers. It’s open-source, cross-platform, and cutting-edge.",
+  copyright	 "TODO",
+  license    "Apache License, Version 2.0",
+  url        "https://github.com/jMonkeyEngine/jmonkeyengine",
+  threads    "Externally single-threaded.  Internally multi-threaded, however this workload is single threaded (dominated by the event loop)",
+  repeats	   "Single iteration renders many frames",
